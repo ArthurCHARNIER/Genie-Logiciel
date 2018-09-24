@@ -66,11 +66,9 @@ public class Panier {
         for(int i= 0;i<this.sacoche.size();i++){
             if(this.sacoche.get(i).getOrigine().equals(origine)){
                 this.sacoche.remove(i);
+                boycottOrigine(origine);
             }
         }
     }
-
-
-
-
+    
 }

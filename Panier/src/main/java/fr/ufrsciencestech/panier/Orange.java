@@ -15,9 +15,10 @@ public class Orange {
 
     private String origine;
 
-    public Orange(double px, String origine) {
-        this.prix = px;
+    public Orange( String origine,double px) {
         this.origine = origine;
+        this.prix = px;
+        
 
         if (this.prix < 0) {
             throw new IllegalArgumentException("Prix négatif : " + this.prix);
@@ -40,11 +41,7 @@ public class Orange {
 
     public boolean equals(Orange o1, Orange o2)
     {
-        if (o1.origine.equals(o2.origine) && (o1.prix == o2.prix))
-        {
-            return true;
-        }
-        return false;
+        return o1.getOrigine().equals(o2.origine) && (o1.prix == o2.prix);
     }
 
 }
