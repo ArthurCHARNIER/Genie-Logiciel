@@ -40,4 +40,37 @@ public class Panier {
         return s;
     }
 
+    // public override equals(Panier p1, Panier p2){
+    //     for(int i = 0; i<p1.size();i++){
+    //         if(p1.get(i))
+    //     }
+    // }
+
+    public void ajouter(Orange e){
+        this.sacoche.add(e);
+    }
+
+    public void retire(){
+        this.sacoche.remove(this.sacoche.size());
+    }
+
+    public double getPrix(){
+        double p = 0.;
+        for(Orange o : this.sacoche){
+            p+= o.getPrix();
+        }
+        return p;
+    }
+
+    public void boycottOrigine(String origine){
+        for(int i= 0;i<this.sacoche.size();i++){
+            if(this.sacoche.get(i).getOrigine().equals(origine)){
+                this.sacoche.remove(i);
+            }
+        }
+    }
+
+
+
+
 }

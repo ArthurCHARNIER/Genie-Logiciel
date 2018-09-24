@@ -38,4 +38,13 @@ public class Orange {
         return s;
     }
 
+    public boolean equals(Orange o1, Orange o2)
+    {
+        if (o1.origine.equals(o2.origine) && (o1.prix == o2.prix))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
