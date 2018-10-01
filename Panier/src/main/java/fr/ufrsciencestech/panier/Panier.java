@@ -40,6 +40,15 @@ public class Panier {
         return s;
     }
 
+    public int getTaille() {
+        return taille;
+    }
+
+    public ArrayList<Orange> getSacoche() {
+        return sacoche;
+    }
+    
+
     // public override equals(Panier p1, Panier p2){
     //     for(int i = 0; i<p1.size();i++){
     //         if(p1.get(i))
@@ -47,11 +56,16 @@ public class Panier {
     // }
 
     public void ajouter(Orange e){
-        this.sacoche.add(e);
+        if(!estPlein() )
+        {
+            this.sacoche.add(e);
+        }
     }
 
     public void retire(){
-        this.sacoche.remove(this.sacoche.size());
+        if(!estVide()){
+            this.sacoche.remove((Integer)this.sacoche.size()-1);
+        }
     }
 
     public double getPrix(){
