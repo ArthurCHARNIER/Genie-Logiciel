@@ -27,7 +27,7 @@ public class App
        
        System.out.println(p.toString());
 
-       System.out.println(o1.equals(02));
+       System.out.println("test : "+o1.equals(o2));
        
 
        

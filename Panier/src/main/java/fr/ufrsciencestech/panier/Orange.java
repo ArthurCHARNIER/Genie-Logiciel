@@ -39,9 +39,34 @@ public class Orange {
         return s;
     }
 
-    public boolean equals(Orange o1, Orange o2)
+    @Override
+    public boolean equals(Object obj)
     {
-        return o1.getOrigine().equals(o2.origine) && (o1.prix == o2.prix);
+        if (this == obj)
+        {
+            return true;
+        }
+        if(obj == null)
+        {
+            return false;
+        }
+        if(getClass() != obj.getClass())
+        {
+            return false;
+        }
+        Orange other = (Orange)obj;
+        
+        if (prix != other.prix)
+        {
+            return false;
+        }
+        
+        if (!origine.equals(other.origine))
+        {
+            return false;
+        }
+        
+        return true;
     }
 
 }
