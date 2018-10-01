@@ -5,24 +5,44 @@
  */
 package fr.ufrsciencestech.panier;
 
+import java.util.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ac532323
  */
-public class VueGSwing extends javax.swing.JFrame {
+public class VueGSwing extends javax.swing.JFrame implements Observer {
+
     private Panier p = new Panier(20);
+    private Controleur c;
 
     /**
      * Creates new form VueGSwing
      */
     public VueGSwing() {
         initComponents();
-        
         this.pack();
         this.setVisible(true);
-      
+
+    }
+
+    public void setTextJlabel(String t) {
+        this.jLabel1.setText(t);
+    }
+
+    public void addControleur(Controleur c) {
+        this.c = c;
+    }
+
+    public void setP(Panier p) {
+        this.p = p;
+    }
+
+    public void update(Observable obj, Object arg) {
+        JOptionPane.showMessageDialog(null, "VGS : Ca a changé");
     }
 
     /**
@@ -88,27 +108,13 @@ public class VueGSwing extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(p.getSacoche().size()<p.getTaille()){
-            Orange o = new Orange("",0);
-            p.ajouter(o);
-            this.jLabel1.setText("");
-            this.jLabel1.setText(String.valueOf(p.getSacoche().size()));
-        }else{
-            JOptionPane.showMessageDialog(null,"Le panier est plein");
-        }
-        
-        
+        c.actionPerformed(evt);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(p.getSacoche().size()>0){
-            p.retire();
-            this.jLabel1.setText("");
-            this.jLabel1.setText(String.valueOf(p.getSacoche().size()));
-        }else{
-            JOptionPane.showMessageDialog(null,"Le panier est vide");
-        }
+        c.actionPerformed(evt);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

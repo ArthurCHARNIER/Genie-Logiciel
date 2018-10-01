@@ -6,12 +6,13 @@
 package fr.ufrsciencestech.panier;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author ac532323
  */
-public class Panier {
+public class Panier extends Observable{
 
     private int taille;
     private ArrayList<Orange> sacoche;
@@ -35,7 +36,7 @@ public class Panier {
     public String toString() {
         String s = "";
         for (Orange o : sacoche) {
-            s+=o.toString()+"\n";
+            s += o.toString() + "\n";
         }
         return s;
     }
@@ -47,42 +48,59 @@ public class Panier {
     public ArrayList<Orange> getSacoche() {
         return sacoche;
     }
-    
 
-    // public override equals(Panier p1, Panier p2){
-    //     for(int i = 0; i<p1.size();i++){
-    //         if(p1.get(i))
-    //     }
-    // }
-
-    public void ajouter(Orange e){
-        if(!estPlein() )
-        {
+    public void ajouter(Orange e) {
+        if (!estPlein()) {
             this.sacoche.add(e);
+            setChanged();
+            notifyObservers();
         }
     }
 
-    public void retire(){
-        if(!estVide()){
-            this.sacoche.remove((Integer)this.sacoche.size()-1);
+    public void retire() {
+        if (!estVide()) {
+            this.sacoche.remove((Integer) this.sacoche.size() - 1);
+            setChanged();
+            notifyObservers();
         }
     }
 
-    public double getPrix(){
+    public double getPrix() {
         double p = 0.;
-        for(Orange o : this.sacoche){
-            p+= o.getPrix();
+        for (Orange o : this.sacoche) {
+            p += o.getPrix();
         }
         return p;
     }
 
-    public void boycottOrigine(String origine){
-        for(int i= 0;i<this.sacoche.size();i++){
-            if(this.sacoche.get(i).getOrigine().equals(origine)){
+    public void boycottOrigine(String origine) {
+        for (int i = 0; i < this.sacoche.size(); i++) {
+            if (this.sacoche.get(i).getOrigine().equals(origine)) {
                 this.sacoche.remove(i);
                 boycottOrigine(origine);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Panier other = (Panier) obj;
+
+        double prix = this.getPrix();
+        if (prix != other.getPrix()) {
+            return false;
+        }
+
+        return true;
     }
     
 }

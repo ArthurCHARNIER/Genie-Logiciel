@@ -5,16 +5,17 @@
  */
 package fr.ufrsciencestech.panier;
 
-import java.util.*;
+import java.util.Observable;
+import javax.swing.JButton;
 
 /**
  *
  * @author ac532323
  */
-public class VueConsole implements Observer{
+public interface VueGraphique {
     
-    @Override
-    public void update(Observable obj, Object arg){
-        System.out.println("VC : Ca a changé dans le panier !");
-    }
+    
+    public void update(Observable obj, Object arg);
+
+    
 }

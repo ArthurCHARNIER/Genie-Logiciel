@@ -33,6 +33,7 @@ public class Orange {
         return origine;
     }
 
+    @Override
     public String toString()
     {
         String s = "Origine : "+ origine+" prix : "+prix;

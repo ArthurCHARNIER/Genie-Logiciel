@@ -1,4 +1,6 @@
 package fr.ufrsciencestech.panier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Hello world!
@@ -6,19 +8,65 @@ package fr.ufrsciencestech.panier;
  */
 public class App 
 {
+    private VueGSwing vgs;
+    private VueGAWT vga;
+    
+    public VueGSwing getVueGS()
+    {
+        return vgs;
+    }
+    public VueGAWT getVueGA()
+    {
+        return vga;
+    }
+    
+    public void setVueGS(VueGSwing vgs)
+    {
+        this.vgs=vgs;
+    }
+    
+    public void setVueGA(VueGAWT vga)
+    {
+        this.vga=vga;
+    }
+    
+    
     public static void main( String[] args )
     {
-       //VueGSwing vue = new VueGSwing();
-        VueGAWT vue2 = new VueGAWT();
+       ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+       App app = (App)context.getBean("App");
+       //
+       //VueGAWT vue2 = new VueGAWT();
        //vue.setVisible(true);
        Panier p = new Panier(20);
+       VueConsole vc = new VueConsole();
+       p.addObserver(vc);
        
-       p.ajouter(new Orange ("France",0.80));
+       
+       //vue graphique
+       /*VueGSwing vg = new VueGSwing();
+       
+       Controleur c = new Controleur();
+       c.setPanier(p);
+       c.setVueGS(vg);
+       p.addObserver(vg);
+       vg.addControleur(c);*/
+       
+       VueGAWT vga = new VueGAWT();
+       Controleur c2 = new Controleur();
+       c2.setPanier(p);
+       c2.setVueGA(vga);
+       p.addObserver(vga);
+       vga.addControleur(c2);
+       
+       //VueGSwing vue = new VueGSwing();
+       
+       /*p.ajouter(new Orange ("France",0.80));
        p.ajouter(new Orange ("France",0.80));       
        p.ajouter(new Orange ("Espagne",0.80));
        p.ajouter(new Orange ("Floride",0.90));
        p.ajouter(new Orange ("France",0.80));
-              System.out.println(p.toString());
+       System.out.println(p.toString());*/
 
        //System.out.println(());
        //p.retire();

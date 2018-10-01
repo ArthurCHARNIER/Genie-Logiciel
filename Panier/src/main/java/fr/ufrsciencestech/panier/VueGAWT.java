@@ -7,30 +7,46 @@ package fr.ufrsciencestech.panier;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ac532323
  */
-public class VueGAWT extends java.awt.Frame {
+public class VueGAWT extends java.awt.Frame implements Observer {
+
     private Panier p = new Panier(20);
+    private Controleur c;
 
     /**
      * Creates new form VueGAWT
      */
     public VueGAWT() {
         initComponents();
-        
-        this.addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e)
-            {
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
         this.pack();
         this.setVisible(true);
-        
+
+    }
+
+    
+    public void setTextJlabel(String t) {
+        this.jLabel1.setText(t);
+    }
+    
+    
+    public void addControleur(Controleur c) {
+        this.c = c;
+    }
+
+    public void update(Observable obj, Object arg) {
+        JOptionPane.showMessageDialog(null, "VGA : Ca a changé");
     }
 
     /**
@@ -51,10 +67,10 @@ public class VueGAWT extends java.awt.Frame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("0");
         add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("+");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -62,7 +78,7 @@ public class VueGAWT extends java.awt.Frame {
         });
         add(jButton1, java.awt.BorderLayout.NORTH);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("-");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -81,27 +97,14 @@ public class VueGAWT extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+        c.actionPerformed(evt);
         // TODO add your handling code here:
-        if(p.getSacoche().size()<p.getTaille()){
-            Orange o = new Orange("",0);
-            p.ajouter(o);
-            this.jLabel1.setText("");
-            this.jLabel1.setText(String.valueOf(p.getSacoche().size()));
-        }else{
-            JOptionPane.showMessageDialog(null,"Le panier est plein");
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(p.getSacoche().size()>0){
-            p.retire();
-            this.jLabel1.setText("");
-            this.jLabel1.setText(String.valueOf(p.getSacoche().size()));
-        }else{
-            JOptionPane.showMessageDialog(null,"Le panier est vide");
-        }
+        c.actionPerformed(evt);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
