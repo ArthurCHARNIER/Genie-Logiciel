@@ -33,14 +33,14 @@ public class App
     
     public static void main( String[] args )
     {
-       ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-       App app = (App)context.getBean("App");
+       /*ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+       App app = (App)context.getBean("App");*/
        //
        //VueGAWT vue2 = new VueGAWT();
        //vue.setVisible(true);
        Panier p = new Panier(20);
-       VueConsole vc = new VueConsole();
-       p.addObserver(vc);
+       /*VueConsole vc = new VueConsole();
+       p.addObserver(vc);*/
        
        
        //vue graphique
@@ -52,21 +52,23 @@ public class App
        p.addObserver(vg);
        vg.addControleur(c);*/
        
-       VueGAWT vga = new VueGAWT();
+       /*VueGAWT vga = new VueGAWT();
        Controleur c2 = new Controleur();
        c2.setPanier(p);
        c2.setVueGA(vga);
        p.addObserver(vga);
-       vga.addControleur(c2);
+       vga.addControleur(c2);*/
        
        //VueGSwing vue = new VueGSwing();
        
-       /*p.ajouter(new Orange ("France",0.80));
+       p.ajouter(new Orange ("France",0.80));
        p.ajouter(new Orange ("France",0.80));       
        p.ajouter(new Orange ("Espagne",0.80));
        p.ajouter(new Orange ("Floride",0.90));
        p.ajouter(new Orange ("France",0.80));
-       System.out.println(p.toString());*/
+       System.out.println(p.toString());
+       
+       System.out.println(p.getPrix());
 
        //System.out.println(());
        //p.retire();

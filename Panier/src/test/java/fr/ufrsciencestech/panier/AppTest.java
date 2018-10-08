@@ -16,5 +16,12 @@ public class AppTest
     public void shouldAnswerWithTrue()
     {
         assertTrue( true );
+        PanierTest pt = new PanierTest();
+        pt.setUp();
+        
+        pt.testAjouter();
+        pt.testEstPlein();
+        pt.testEstVide();
+        pt.testGetPrix();
     }
 }

@@ -66,7 +66,7 @@ public class Panier extends Observable{
     }
 
     public double getPrix() {
-        double p = 0.;
+        double p = 0;
         for (Orange o : this.sacoche) {
             p += o.getPrix();
         }
